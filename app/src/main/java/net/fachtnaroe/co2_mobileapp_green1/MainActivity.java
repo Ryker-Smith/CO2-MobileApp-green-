@@ -1,5 +1,6 @@
 package net.fachtnaroe.co2_mobileapp_green1;
 
+import android.graphics.fonts.FontFamily;
 import com.google.appinventor.components.runtime.Button;
 import com.google.appinventor.components.runtime.Clock;
 import com.google.appinventor.components.runtime.Component;
@@ -10,62 +11,87 @@ import com.google.appinventor.components.runtime.HorizontalArrangement;
 import com.google.appinventor.components.runtime.Image;
 import com.google.appinventor.components.runtime.Label;
 import com.google.appinventor.components.runtime.Notifier;
-import com.google.appinventor.components.runtime.PasswordTextBox;
-import com.google.appinventor.components.runtime.TableArrangement;
 import com.google.appinventor.components.runtime.TextBox;
 import com.google.appinventor.components.runtime.VerticalArrangement;
 import com.google.appinventor.components.runtime.VerticalScrollArrangement;
-import com.google.appinventor.components.runtime.Web;
-import com.google.appinventor.components.runtime.WebViewer;
-import com.google.appinventor.components.runtime.util.TimerInternal;
 
-import java.io.Console;
+import java.util.Random;
 
 public class MainActivity extends Form implements HandlesEventDispatching {
-
     private
-    HorizontalArrangement HorizontalArrangement1;
-    VerticalArrangement VerticalArrangement1;
-    TextBox usernameBox;
-    PasswordTextBox passwordBox;
-
-    Button goButton;
+    VerticalArrangement Main;
+    Label CO2Monitor, CO2, CO2Reading, Temperature, TemperatureReading;
+    Button PreviousCO2;
 
     protected void $define() {
+        /* this next allows the app to use the full screen.
+        In fact, seemingly anything makes this work at 100%
+        except "Fixed" and the this.Sizing instruction
+        being absent in the first place. */
+        /* Cur seo isteach. Is cuma cén focal atá ann, níl gá leis */
+        this.Sizing("Responsive");
 
-        HorizontalArrangement1=new HorizontalArrangement(this);
-        HorizontalArrangement1.WidthPercent(100);
+        Main = new VerticalArrangement(this);
+        Main.HeightPercent(100);
+        Main.Image("cowbackground.jpg");
 
-        VerticalArrangement1 = new VerticalArrangement(HorizontalArrangement1);
-        usernameBox=new TextBox(VerticalArrangement1);
-        usernameBox.FontSize(14);
-        passwordBox=new PasswordTextBox(VerticalArrangement1);
-        goButton = new Button(HorizontalArrangement1);
-        goButton.Text("Hello");
+        CO2Monitor = new Label(Main);
+        CO2Monitor.Text("CO2 MONITOR");
+        CO2Monitor.TextColor(COLOR_BLACK);
+        CO2Monitor.TextAlignment(ALIGNMENT_CENTER);
+        CO2Monitor.HeightPercent(8);
+        CO2Monitor.WidthPercent(100);
+        CO2Monitor.FontSize(35);
+        CO2Monitor.FontTypeface(TYPEFACE_SERIF);
+        CO2Monitor.FontBold(true);
 
-        EventDispatcher.registerEventForDelegation(this, formName, "BackPressed");
-        EventDispatcher.registerEventForDelegation(this, formName, "Click");
-    }
+        CO2 = new Label(Main);
+        CO2.Text("CO2 (parts per million-ppm):");
+        CO2.TextColor(COLOR_BLACK);
+        CO2.TextAlignment(ALIGNMENT_CENTER);
+        CO2.HeightPercent(10);
+        CO2.WidthPercent(100);
+        CO2.FontSize(30);
+        CO2.FontTypeface(TYPEFACE_SERIF);
 
-    public boolean dispatchEvent(Component component, String componentName, String eventName, Object[] params) {
+        CO2Reading = new Label(Main);
+        CO2Reading.Text("334");
+        CO2Reading.TextColor(COLOR_BLACK);
+        CO2Reading.TextAlignment(ALIGNMENT_CENTER);
+        CO2Reading.HeightPercent(10);
+        CO2Reading.WidthPercent(100);
+        CO2Reading.FontSize(30);
+        CO2Reading.BackgroundColor(COLOR_WHITE);
+        CO2Reading.FontTypeface(TYPEFACE_SERIF);
 
-        System.err.print("dispatchEvent: " + formName + " [" + component.toString() + "] [" + componentName + "] " + eventName);
-        if (eventName.equals("BackPressed")) {
-            // this would be a great place to do something useful
+        Temperature = new Label(Main);
+        Temperature.Text("Temperature (degrees celcius):");
+        Temperature.TextColor(COLOR_BLACK);
+        Temperature.TextAlignment(ALIGNMENT_CENTER);
+        Temperature.HeightPercent(10);
+        Temperature.WidthPercent(100);
+        Temperature.FontSize(30);
+        Temperature.FontTypeface(TYPEFACE_SERIF);
 
-            return true;
-        }
-        else if (eventName.equals("Click")) {
-            if (component.equals(goButton)) {
-                goButton.Text("Goodbye");
-                System.err.print("You pressed a button");
-                // invert te timer status
-                return true;
-            }
-        }
-        else if (eventName.equals("Timer")) {
-        }
-        // true means event has been handled by us (ie recognised)
-        return false;
+        TemperatureReading = new Label(Main);
+        TemperatureReading.HeightPercent(10);
+        TemperatureReading.WidthPercent(100);
+        TemperatureReading.Text("17");
+        TemperatureReading.TextAlignment(ALIGNMENT_CENTER);
+        TemperatureReading.TextColor(COLOR_BLACK);
+        TemperatureReading.FontSize(30);
+        TemperatureReading.BackgroundColor(COLOR_WHITE);
+        TemperatureReading.FontTypeface(TYPEFACE_SERIF);
+
+        PreviousCO2 = new Button(Main);
+        PreviousCO2.Text("Previous CO2 Readings");
+        PreviousCO2.TextColor(COLOR_BLACK);
+        PreviousCO2.TextAlignment(ALIGNMENT_CENTER);
+        PreviousCO2.HeightPercent(10);
+        PreviousCO2.WidthPercent(100);
+        PreviousCO2.FontSize(25);
+        PreviousCO2.BackgroundColor(COLOR_GRAY);
+        PreviousCO2.FontTypeface(TYPEFACE_SERIF);
     }
 }
+// Here be monsters:
