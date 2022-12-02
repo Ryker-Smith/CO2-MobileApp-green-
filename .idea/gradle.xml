@@ -10,8 +10,8 @@
         <option name="gradleJvm" value="11" />
         <option name="modules">
           <set>
-            <option value="$USER_HOME$/mobile-data-store/Activities/android-studio-projects/CO2-MobileApp-green1" />
-            <option value="$USER_HOME$/mobile-data-store/Activities/android-studio-projects/CO2-MobileApp-green1/app" />
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
           </set>
         </option>
       </GradleProjectSettings>
