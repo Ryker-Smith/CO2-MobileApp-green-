@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">CO2-MobileApp-green1</string>
+    <string name="CO2Sensor">CO2 Sensor</string>
+    <string name="CO2_Sensor">CO2 Sensor</string>
+    <string name="todo">TODO</string>
+    <string name="CO2Monitor">CO2 Sensor</string>
 </resources>
