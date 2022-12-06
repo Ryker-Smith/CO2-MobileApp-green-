@@ -6,4 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".MyApplication">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="410dp"
+        android:layout_height="398dp"
+        android:layout_marginTop="326dp"
+        android:layout_marginBottom="7dp"
+        android:contentDescription="@string/todo"
+        android:src="@drawable/co2_sensor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <MultiAutoCompleteTextView
+        android:id="@+id/multiAutoCompleteTextView"
+        android:layout_width="244dp"
+        android:layout_height="173dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginBottom="496dp"
+        android:text="@string/CO2Monitor"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

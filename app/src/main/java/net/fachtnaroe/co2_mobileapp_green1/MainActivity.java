@@ -33,7 +33,7 @@ class MyApplication extends Form implements HandlesEventDispatching {
 
         Main = new VerticalArrangement(this);
         Main.HeightPercent(100);
-        Main.Image("CO2_Sensor.jpg");
+        Main.Image("co2_sensor.jpg");
         Label1 = new Label (Main);
         Label1.Text("CO2 Sensor");
         Label1.TextColor(COLOR_BLACK);
@@ -41,7 +41,7 @@ class MyApplication extends Form implements HandlesEventDispatching {
         Label1.TextAlignment(ALIGNMENT_CENTER);
         Label1.HeightPercent(8);
         Label1.WidthPercent(100);
-        Label1.FontSize(72);
+        Label1.FontSize(250);
         Label1.FontTypeface(TYPEFACE_SERIF);
         Label1.FontBold(true);
     }
