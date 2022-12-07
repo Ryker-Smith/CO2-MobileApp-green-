@@ -1,14 +1,27 @@
 package net.fachtnaroe.co2_mobileapp_green1;
 
+import android.graphics.fonts.FontFamily;
 import com.google.appinventor.components.runtime.Button;
+import com.google.appinventor.components.runtime.Clock;
+import com.google.appinventor.components.runtime.Component;
+import com.google.appinventor.components.runtime.EventDispatcher;
 import com.google.appinventor.components.runtime.Form;
 import com.google.appinventor.components.runtime.HandlesEventDispatching;
+import com.google.appinventor.components.runtime.HorizontalArrangement;
+import com.google.appinventor.components.runtime.Image;
 import com.google.appinventor.components.runtime.Label;
+import com.google.appinventor.components.runtime.Notifier;
+import com.google.appinventor.components.runtime.TextBox;
 import com.google.appinventor.components.runtime.VerticalArrangement;
+import com.google.appinventor.components.runtime.VerticalScrollArrangement;
 
-class MainActivity extends Form implements HandlesEventDispatching {
-    Label Label1;
-    Button PreviousCO2Readings;
+import java.util.Random;
+
+public class MainActivity extends Form implements HandlesEventDispatching {
+    private
+    VerticalArrangement Main;
+    Label CO2Monitor, CO2, CO2Reading, Temperature, TemperatureReading;
+    Button PreviousCO2;
 
     protected void $define() {
         /* this next allows the app to use the full screen.
@@ -18,151 +31,67 @@ class MainActivity extends Form implements HandlesEventDispatching {
         /* Cur seo isteach. Is cuma cén focal atá ann, níl gá leis */
         this.Sizing("Responsive");
 
-        VerticalArrangement main = new VerticalArrangement(this);
-        main.HeightPercent(100);
-        main.Image("co2_sensor.jpg");
-        Label1 = new Label (main);
-        Label1.Text("CO2 Sensor");
-        Label1.TextColor(COLOR_BLACK);
-        Label1.BackgroundColor(COLOR_CYAN);
-        Label1.TextAlignment(ALIGNMENT_CENTER);
-        Label1.HeightPercent(8);
-        Label1.WidthPercent(100);
-        Label1.FontSize(250);
-        Label1.FontTypeface(TYPEFACE_SERIF);
-        Label1.FontBold(true);
+        Main = new VerticalArrangement(this);
+        Main.HeightPercent(100);
+        Main.Image("cowbackground.jpg");
 
-        Label1 = new Label(main);
-        Label1.Text("CO2 MONITOR");
-        Label1.TextColor(COLOR_BLACK);
-        Label1.BackgroundColor(COLOR_CYAN);
-        Label1.TextAlignment(ALIGNMENT_CENTER);
-        Label1.HeightPercent(8);
-        Label1.WidthPercent(100);
-        Label1.FontSize(72);
-        Label1.FontTypeface(TYPEFACE_SERIF);
-        Label1.FontBold(true);
+        CO2Monitor = new Label(Main);
+        CO2Monitor.Text("CO2 MONITOR");
+        CO2Monitor.TextColor(COLOR_BLACK);
+        CO2Monitor.TextAlignment(ALIGNMENT_CENTER);
+        CO2Monitor.HeightPercent(8);
+        CO2Monitor.WidthPercent(100);
+        CO2Monitor.FontSize(35);
+        CO2Monitor.FontTypeface(TYPEFACE_SERIF);
+        CO2Monitor.FontBold(true);
 
-        Label1.Text("CO2 (parts per million-ppm):");
-        Label1.TextColor(COLOR_BLACK);
-        Label1.BackgroundColor(COLOR_CYAN);
-        Label1.TextAlignment(ALIGNMENT_CENTER);
-        Label1.HeightPercent(10);
-        Label1.WidthPercent(100);
-        Label1.FontSize(30);
-        Label1.FontTypeface(TYPEFACE_SERIF);
+        CO2 = new Label(Main);
+        CO2.Text("CO2 (parts per million-ppm):");
+        CO2.TextColor(COLOR_BLACK);
+        CO2.TextAlignment(ALIGNMENT_CENTER);
+        CO2.HeightPercent(10);
+        CO2.WidthPercent(100);
+        CO2.FontSize(30);
+        CO2.FontTypeface(TYPEFACE_SERIF);
 
-        Label1.Text("565");
-        Label1.TextColor(COLOR_BLACK);
-        Label1.TextAlignment(ALIGNMENT_CENTER);
-        Label1.HeightPercent(10);
-        Label1.WidthPercent(100);
-        Label1.FontSize(30);
-        Label1.BackgroundColor(COLOR_CYAN);
-        Label1.FontTypeface(TYPEFACE_SERIF);
+        CO2Reading = new Label(Main);
+        CO2Reading.Text("334");
+        CO2Reading.TextColor(COLOR_BLACK);
+        CO2Reading.TextAlignment(ALIGNMENT_CENTER);
+        CO2Reading.HeightPercent(10);
+        CO2Reading.WidthPercent(100);
+        CO2Reading.FontSize(30);
+        CO2Reading.BackgroundColor(COLOR_WHITE);
+        CO2Reading.FontTypeface(TYPEFACE_SERIF);
 
-        Label1.Text("Temperature (degrees celsius):");
-        Label1.TextColor(COLOR_BLACK);
-        Label1.TextAlignment(ALIGNMENT_CENTER);
-        Label1.HeightPercent(10);
-        Label1.WidthPercent(100);
-        Label1.FontSize(30);
-        Label1.BackgroundColor(COLOR_CYAN);
-        Label1.FontTypeface(TYPEFACE_SERIF);
-        Label1 = new Label(main);
+        Temperature = new Label(Main);
+        Temperature.Text("Temperature (degrees celcius):");
+        Temperature.TextColor(COLOR_BLACK);
+        Temperature.TextAlignment(ALIGNMENT_CENTER);
+        Temperature.HeightPercent(10);
+        Temperature.WidthPercent(100);
+        Temperature.FontSize(30);
+        Temperature.FontTypeface(TYPEFACE_SERIF);
 
-        Label1.HeightPercent(10);
-        Label1.WidthPercent(100);
-        Label1.Text("26");
-        Label1.TextAlignment(ALIGNMENT_CENTER);
-        Label1.TextColor(COLOR_BLACK);
-        Label1.FontSize(30);
-        Label1.BackgroundColor(COLOR_CYAN);
-        Label1.FontTypeface(TYPEFACE_SERIF);
+        TemperatureReading = new Label(Main);
+        TemperatureReading.HeightPercent(10);
+        TemperatureReading.WidthPercent(100);
+        TemperatureReading.Text("17");
+        TemperatureReading.TextAlignment(ALIGNMENT_CENTER);
+        TemperatureReading.TextColor(COLOR_BLACK);
+        TemperatureReading.FontSize(30);
+        TemperatureReading.BackgroundColor(COLOR_WHITE);
+        TemperatureReading.FontTypeface(TYPEFACE_SERIF);
 
-        PreviousCO2Readings = new Button(main);
-        PreviousCO2Readings.Text("Previous CO2 Readings");
-        PreviousCO2Readings.TextColor(COLOR_BLACK);
-        PreviousCO2Readings.TextAlignment(ALIGNMENT_CENTER);
-        PreviousCO2Readings.HeightPercent(10);
-        PreviousCO2Readings.WidthPercent(100);
-        PreviousCO2Readings.FontSize(25);
-        PreviousCO2Readings.BackgroundColor(COLOR_CYAN);
-        PreviousCO2Readings.FontTypeface(TYPEFACE_SERIF);
-
-        Label1 = new Label(main);
-        Label1.HeightPercent(10);
-        Label1.WidthPercent(100);
-        Label1.Text("Previous CO2 Readings");
-        Label1.TextAlignment(ALIGNMENT_CENTER);
-        Label1.TextColor(COLOR_BLACK);
-        Label1.FontSize(72);
-        Label1.BackgroundColor(COLOR_CYAN);
-        Label1.FontTypeface(TYPEFACE_SERIF);
-
-        Label1.HeightPercent(10);
-        Label1.WidthPercent(100);
-        Label1.Text("565");
-        Label1.TextAlignment(ALIGNMENT_CENTER);
-        Label1.TextColor(COLOR_BLACK);
-        Label1.FontSize(30);
-        Label1.BackgroundColor(COLOR_CYAN);
-        Label1.FontTypeface(TYPEFACE_SERIF);
-
-        Label1.HeightPercent(10);
-        Label1.WidthPercent(100);
-        Label1.Text("618");
-        Label1.TextAlignment(ALIGNMENT_CENTER);
-        Label1.TextColor(COLOR_BLACK);
-        Label1.FontSize(30);
-        Label1.BackgroundColor(COLOR_CYAN);
-        Label1.FontTypeface(TYPEFACE_SERIF);
-
-        Label1.HeightPercent(10);
-        Label1.WidthPercent(100);
-        Label1.Text("594");
-        Label1.TextAlignment(ALIGNMENT_CENTER);
-        Label1.TextColor(COLOR_BLACK);
-        Label1.FontSize(30);
-        Label1.BackgroundColor(COLOR_CYAN);
-        Label1.FontTypeface(TYPEFACE_SERIF);
-
-        Label1 = new Label(main);
-        Label1.HeightPercent(10);
-        Label1.WidthPercent(100);
-        Label1.Text("649");
-        Label1.TextAlignment(ALIGNMENT_CENTER);
-        Label1.TextColor(COLOR_BLACK);
-        Label1.FontSize(30);
-        Label1.BackgroundColor(COLOR_CYAN);
-        Label1.FontTypeface(TYPEFACE_SERIF);
-
-        Label1.HeightPercent(10);
-        Label1.WidthPercent(100);
-        Label1.Text("523");
-        Label1.TextAlignment(ALIGNMENT_CENTER);
-        Label1.TextColor(COLOR_BLACK);
-        Label1.FontSize(30);
-        Label1.BackgroundColor(COLOR_CYAN);
-        Label1.FontTypeface(TYPEFACE_SERIF);
-
-        Label1.HeightPercent(10);
-        Label1.WidthPercent(100);
-        Label1.Text("606");
-        Label1.TextAlignment(ALIGNMENT_CENTER);
-        Label1.TextColor(COLOR_BLACK);
-        Label1.FontSize(30);
-        Label1.BackgroundColor(COLOR_CYAN);
-        Label1.FontTypeface(TYPEFACE_SERIF);
-
-        Label1.HeightPercent(10);
-        Label1.WidthPercent(100);
-        Label1.Text("482");
-        Label1.TextAlignment(ALIGNMENT_CENTER);
-        Label1.TextColor(COLOR_BLACK);
-        Label1.FontSize(30);
-        Label1.BackgroundColor(COLOR_CYAN);
-        Label1.FontTypeface(TYPEFACE_SERIF);
+        PreviousCO2 = new Button(Main);
+        PreviousCO2.Text("Previous CO2 Readings");
+        PreviousCO2.TextColor(COLOR_BLACK);
+        PreviousCO2.TextAlignment(ALIGNMENT_CENTER);
+        PreviousCO2.HeightPercent(10);
+        PreviousCO2.WidthPercent(100);
+        PreviousCO2.FontSize(25);
+        PreviousCO2.BackgroundColor(COLOR_GRAY);
+        PreviousCO2.FontTypeface(TYPEFACE_SERIF);
     }
 }
 // Here be monsters:
